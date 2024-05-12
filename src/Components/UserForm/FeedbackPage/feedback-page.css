@@ -1,0 +1,27 @@
+
+
+.star-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.star-button.filled {
+    color: yellow;
+}
+
+
+.button-container {
+    margin-top: 20px;
+    color: rgb(107 114 128);
+}
+
+
+.next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 10px;
+    background-color: rgb(55 65 81);
+    color: white;
+}
