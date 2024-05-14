@@ -25,12 +25,12 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
-    color:rgb(67 56 202) ;
+    color: rgb(67 56 202);
 
 }
 
 .easyform-title {
-    color:rgb(32, 21, 145) ;
+    color: rgb(32, 21, 145);
 }
 
 .powered-by-button {
@@ -58,3 +58,5 @@
     color: rgb(67 56 202);
     border: 0;
 }
+
+
