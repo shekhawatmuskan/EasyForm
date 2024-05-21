@@ -1,4 +1,15 @@
 /* form-maker-header.css */
+.arrow-button {
+  background-color: blue;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.arrow-button:hover {
+  background-color: tra;
+}
 
 .form-header {
   display: flex;
@@ -25,41 +36,68 @@
   border-radius: 5px;
   background-color: #ffffff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   transition: background-color 0.3s ease;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 70px
 }
 
-.preview-button,
+.preview-button {
+  background-color: lightgray;
+  padding: 2px 2px;
+  border: 2px solid lightgray;
+  border-radius: 8px;
+  border-width: 8PX;
+  height: 30px;
+  text-align: center;
+  margin-right: 10px;
+  color: black;
+  
+
+}
+
 .publish-button {
-  background-color: #e0e0e0;
-  margin-left: 10px; 
-}
+  background-color: rgb(55 65 81);
+  padding: 2px 2px;
+  border: 2px solid rgb(55 65 81);
+  border-radius: 8px;
+  border-width: 8PX;
+  height: 30px;
+  text-align: center;
+  color: white;
+ 
 
+}
 .action-button:hover {
-  background-color: #e0e0e0; /* Change to a slightly different shade on hover */
+  background-color: #e0e0e0;
+  /* Change to a slightly different shade on hover */
 }
 
 .button-icon {
   margin-right: 5px;
+  
 }
 
 /* Define button colors */
-.cubic{
-  color: cubic-bezier(.4,0,.2,1);
+.cubic {
+  color: cubic-bezier(.4, 0, .2, 1);
 }
 
 .cubic {
-  color: cubic-bezier(.4,0,.2,1);
-}
-
-.cubic{
-  color: cubic-bezier(.4,0,.2,1);
+  color: cubic-bezier(.4, 0, .2, 1);
 }
 
 .cubic {
-  color: cubic-bezier(.4,0,.2,1);
+  color: cubic-bezier(.4, 0, .2, 1);
 }
 
 .cubic {
-  color:cubic-bezier(.4,0,.2,1);
+  color: cubic-bezier(.4, 0, .2, 1);
+}
+
+.cubic {
+  color: cubic-bezier(.4, 0, .2, 1);
 }
