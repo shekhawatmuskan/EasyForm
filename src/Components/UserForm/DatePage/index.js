@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './date-page.css';
 
 function DatePage() {
@@ -25,7 +25,8 @@ function DatePage() {
             </div>
 
             <div className="button-container">
-                <button className="start-button">Next</button>
+                <button className="next-button">Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
             </div>
         </div>
     );

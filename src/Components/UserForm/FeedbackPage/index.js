@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './feedback-page.css';
 
 
@@ -31,7 +33,9 @@ function FeedbackPage() {
             </div>
             {rated && <p>You rated: {rating} stars</p>}
             <div className="button-container">
-                <button className="next-button" onClick={handleNextClick}>Next</button>
+                <button className="next-button" onClick={handleNextClick}>Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
+                
             </div>
         </div>
     )

@@ -1,0 +1,68 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 70%;
+    background-color: white;
+    border: 15px solid gray;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    display: flex;
+    /* Add display flex */
+    flex-direction: column;
+    /* Align items in a column */
+    align-items: flex-start;
+    /* Align items to the left */
+
+}
+
+.close {
+    display: none;
+}
+
+.modal-content {
+    padding: 20px;
+    overflow-y: auto;
+
+}
+
+.add-block-button {
+    padding: 5px 10px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 4px;
+    /* Add margin bottom to create space between buttons */
+}
+
+.add-block-button .icon {
+    margin-right: 5px;
+    /* Add margin-right to create space between icon and text */
+}
+
+.use-block-button {
+    /* Your button styles */
+    position: absolute;
+    bottom: 20px;
+    /* Adjust this value to change the vertical position */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: black;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.arrow-icon {
+    margin-left: 10px;
+}
+

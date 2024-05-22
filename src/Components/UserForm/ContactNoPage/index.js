@@ -1,4 +1,6 @@
 import './contact-no-page.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
 
@@ -23,7 +25,8 @@ function ContactNoPage() {
             />
 
             <div className="button-container">
-                <button className="start-button">Next</button>
+                <button className="next-button">Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
 
             </div>
         </div>)

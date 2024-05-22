@@ -3,7 +3,7 @@
 .star-button {
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 50px;
     cursor: pointer;
 }
 
@@ -24,4 +24,9 @@
     margin-right: 10px;
     background-color: rgb(55 65 81);
     color: white;
+    
+}
+
+.button-icon{
+    margin-left: 3px;
 }

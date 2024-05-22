@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './multi-select-page.css';
 
 function MultiSelectPage() {
@@ -41,7 +43,8 @@ function MultiSelectPage() {
                 </div>
             </div>
             <div className="button-container">
-                <button className="start-button">Next</button>
+                <button className="next-button">Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
             </div>
         </div>
     );

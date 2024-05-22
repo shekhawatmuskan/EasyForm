@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './file-upload-page.css';
 
 function FileUploadPage() {
@@ -18,7 +20,8 @@ function FileUploadPage() {
                 </div>
             </label>
             <div className="button-container">
-                <button className="start-button">Next</button>
+                <button className="next-button">Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
             </div>
         </div>
     );

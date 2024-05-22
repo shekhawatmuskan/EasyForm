@@ -1,0 +1,52 @@
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100vh;
+    /* Adjust height as needed */
+}
+
+
+.left-nav {
+    width: 20%;
+    background-color: #f0f0f0;
+    overflow:scroll;
+    height: 200vh;
+}
+
+.right-nav {
+    width: 20%;
+    background-color: #f0f0f0;
+     height: 200vh;
+    
+    
+}
+
+
+
+
+.middle-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dotted-rectangle {
+    border: 2px dashed #999;
+    /* Example dashed border */
+    width: 80%;
+    /* Adjust width as needed */
+    height: 300px;
+    position: relative;
+    margin-top: 40px;
+}
+
+.path-strobe {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+    /* Ensure the PathStrobe appears above the dotted rectangle */
+}

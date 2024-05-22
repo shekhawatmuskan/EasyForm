@@ -1,0 +1,91 @@
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.logo {
+    width: 400px;
+}
+
+.sign-up-container {
+    background-color: white;
+    padding: 20px;
+    width: 500px;
+    height: 450px;
+    margin-bottom: 40px;
+    border: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-sign-up-button {
+    width: 400px;
+    background-color: rgb(66, 133, 244);
+    color: white;
+    font-weight: 500;
+    border: 5px solid rgb(66, 133, 244);
+    height: 40px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.google-sign-up-button:hover {
+    background-color: blue;
+}
+
+.google-icon {
+    margin-right: 10px;
+}
+
+.firstname-input {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.lastname-input {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.email-input {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.password-input {
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+}
+
+
+.register-button {
+    background-color: black;
+    color: white;
+    width: 400px;
+    font-weight: 500;
+    border: none;
+    height: 40px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.register-button:hover {
+    background-color: #333;
+}

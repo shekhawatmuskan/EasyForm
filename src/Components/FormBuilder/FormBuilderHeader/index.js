@@ -1,9 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faUpload, faTools, faPalette, faCode, faShareAlt, faPoll } from '@fortawesome/free-solid-svg-icons';
-import './form-maker-header.css'; // Import the CSS file
+import './form-builder-header.css'; // Import the CSS file
 
-function FormMakerHeader() {
+function FormBuilderHeader() {
   return (
     <div className="form-header">
       <div className="form-header-content">
@@ -52,4 +52,4 @@ function FormMakerHeader() {
   );
 }
 
-export default FormMakerHeader;
+export default FormBuilderHeader;
