@@ -15,6 +15,10 @@
     width: 400px;
 }
 
+.underline {
+    text-decoration: underline;
+}
+
 .login-container {
     background-color: white;
     padding: 20px;
@@ -73,7 +77,7 @@
 
 .input-label {
     align-self: flex-start;
-    /* Aligning labels to the left */
+    
 }
 
 
@@ -91,8 +95,8 @@
     width: 400px;
     
 }
-}
 
 .sign-in-button:hover {
     background-color: #333;
+}
 }

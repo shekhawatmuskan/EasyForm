@@ -10,7 +10,7 @@ function LoginPage() {
                     {/* <img src="https://app.youform.io/images/youform-logo-small.png" alt="Logo" className="logo" /> */}
                     <h1>EasyForm</h1>
                     <h2>Sign in to your account</h2>
-                    <p>Or <a>create a new account</a></p>
+                    <p>Or <span className="underline">create a new account</span></p>
                     <div className="login-container">
                         <button className="google-login-button">
                             <FaGoogle className="google-icon" />
