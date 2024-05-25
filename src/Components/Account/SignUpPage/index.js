@@ -4,13 +4,14 @@ import { FaGoogle } from 'react-icons/fa';
 
 function SignUpPage() {
     return (
-        <div style={{ backgroundColor: 'rgb(249, 250, 251)' }}>
+        <div className="page-container">
             <div className="logo-container">
                 <div>
                     {/* <img src="https://app.youform.io/images/youform-logo-small.png" alt="Logo" className="logo" /> */}
                     <h1>EasyForm</h1>
                     <h2>Create a new account</h2>
-                    <p>Or sign in to your account</p>
+                    <p> Or <span className="underline">sign in to your account</span> </p>
+
                     <div className="sign-up-container">
                         <button className="google-sign-up-button">
                             <FaGoogle className="google-icon" />
@@ -27,7 +28,6 @@ function SignUpPage() {
 
                         <button className="register-button">Register</button>
                     </div>
-
                 </div>
             </div>
         </div>
