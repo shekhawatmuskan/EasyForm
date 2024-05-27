@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './dropdown-list-page.css';
 
 function DropdownListPage() {
@@ -32,28 +32,31 @@ function DropdownListPage() {
     };
 
     return (
-        <div className="container">
-            <h1>Please select which specialists you want to prefer.</h1>
+        <div className="container-dropdown-page">
+            <h1>which specialist you want to prefer</h1>
 
             <div className="input-dropdown">
-                <div>
-                    <input
-                        type="text"
-                        value={selectedSpecialists.length === 0 ? "Please select an option" : selectedSpecialists.join(', ')}
-                        onClick={toggleDropdown}
-                        readOnly
-                    />
-                    {showDropdown && (
+                <input
+                    type="text"
+                    value={selectedSpecialists.length === 0 ? "Please select an option" : selectedSpecialists.join(', ')}
+                    onClick={toggleDropdown}
+                    readOnly
+                    className="input-field" // Add this className
+                />
+                {showDropdown && (
+                    <div className="dropdown-list">
                         <select onChange={handleDropdownChange} multiple>
                             {specialists.map((specialist, index) => (
                                 <option key={index} value={specialist}>{specialist}</option>
                             ))}
                         </select>
-                    )}
-                </div>
-                <button className="next-button">Next
-                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
+                    </div>
+                )}
             </div>
+            <button className="next-button">
+                Next
+                <FontAwesomeIcon icon={faArrowRight} className="button-icon" />
+            </button>
         </div>
     );
 }

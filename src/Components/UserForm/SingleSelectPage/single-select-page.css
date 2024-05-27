@@ -1,0 +1,78 @@
+.container-single-select-page {
+    font-size: 15px;
+    color: rgb(55 65 81);
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
+
+
+.time-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+   
+}
+
+.time-option {
+    position: relative;
+    display: inline-block;
+    padding: 10px 40px 10px 20px; /* Adjust padding to accommodate the circle */
+    margin: 0 10px;
+    background-color: transparent;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.circle {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Position the circle on the right side */
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgb(55 65 81);
+    display: none; /* Initially hide the circle */
+}
+
+.time-option:hover {
+    background-color: #eee;
+}
+
+.time-option.selected:hover {
+    background-color: rgb(55 65 81);
+    color: #fff;
+}
+
+.time-option.selected .circle {
+    display: block; 
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 15px;
+    background-color: rgb(55 65 81);
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+    align-items: left;
+}
+
+.next-button:hover {
+    background-color: rgb(55 65 81);
+}
+
+.button-icon {
+    margin-left: 5px;
+}
+}

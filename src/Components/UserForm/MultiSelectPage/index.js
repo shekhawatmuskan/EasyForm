@@ -1,50 +1,96 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faArrowRight } from '@fortawesome/free-solid-svg-icons'; // Importing faArrowRight icon
 import './multi-select-page.css';
 
 function MultiSelectPage() {
     const [selectedDays, setSelectedDays] = useState([]);
 
-    const toggleDaySelection = (day) => {
+    const handleSelectDay = (day) => {
         if (selectedDays.includes(day)) {
-            setSelectedDays(selectedDays.filter(d => d !== day));
+            setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== day));
         } else {
             setSelectedDays([...selectedDays, day]);
         }
     };
 
-    const isDaySelected = (day) => {
-        return selectedDays.includes(day);
-    };
-
     return (
-        <div className="container">
+        <div className="container-multi-select-page">
             <h1>Which days suit you for a visit?</h1>
-            <div className="multi-select-input bg-white border border-gray-300 rounded-lg py-3 px-4 max-w-96">
-                <input 
-                    type="text" 
-                    placeholder="Select days"
-                    readOnly
-                    className="min-w-40 block relative cursor-pointer"
-                    value={selectedDays.join(', ')}
-                />
-                <div className="selected-options">
-                    {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
-                        <span 
-                            key={day} 
-                            className={`inline-block py-1 px-2 cursor-pointer ${isDaySelected(day) ? 'bg-gray-50 rounded-lg' : ''}`}
-                            onClick={() => toggleDaySelection(day)}
-                        >
-                            {day}
-                            {isDaySelected(day) && <span className="arrow">➜</span>}
-                        </span>
-                    ))}
+
+            <div className="days-options">
+                <div className="row">
+                    <div
+                        className={`day-option ${selectedDays.includes('Monday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Monday')}
+                    >
+                        Monday
+                        {selectedDays.includes('Monday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
+
+                    <div
+                        className={`day-option ${selectedDays.includes('Tuesday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Tuesday')}
+                    >
+                        Tuesday
+                        {selectedDays.includes('Tuesday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
+
+                    <div
+                        className={`day-option ${selectedDays.includes('Wednesday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Wednesday')}
+                    >
+                        Wednesday
+                        {selectedDays.includes('Wednesday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
                 </div>
             </div>
+
+            <div className="days-options">
+                <div className="row">
+                    <div
+                        className={`day-option ${selectedDays.includes('Thursday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Thursday')}
+                    >
+                        Thursday
+                        {selectedDays.includes('Thursday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
+
+                    <div
+                        className={`day-option ${selectedDays.includes('Friday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Friday')}
+                    >
+                        Friday
+                        {selectedDays.includes('Friday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
+
+                    <div
+                        className={`day-option ${selectedDays.includes('Saturday') ? 'selected' : ''}`}
+                        onClick={() => handleSelectDay('Saturday')}
+                    >
+                        Saturday
+                        {selectedDays.includes('Saturday') && (
+                            <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                        )}
+                    </div>
+                </div>
+            </div>
+
             <div className="button-container">
-                <button className="next-button">Next
-                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
+                <button className="next-button" disabled={selectedDays.length === 0}>
+                    Next
+                    <FontAwesomeIcon icon={faArrowRight} className="button-icon" />
+                </button>
             </div>
         </div>
     );

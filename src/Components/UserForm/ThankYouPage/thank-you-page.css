@@ -1,21 +1,26 @@
-.container {
-    text-align: center;
-    margin-top: 100px;
+.container-thankyou-page {
     font-size: 20px;
     color: rgb(55 65 81);
-}
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
 
-.button-container {
-    margin-top: 20px;
-    color: rgb(107 114 128);
-}
+
+    .button-container {
+        margin-top: 20px;
+        color: rgb(107 114 128);
+    }
 
 
-.create-your-own-button {
-    padding: 10px 15px;
-    font-size: 17px;
-    background-color: rgb(224 231 255);
-    color: rgb(67 56 202);
-    border: 0;
+    .create-your-own-button {
+        padding: 10px 15px;
+        font-size: 17px;
+        background-color: rgb(224 231 255);
+        color: rgb(67 56 202);
+        border: 0;
+        border-radius: 5px;
 
+    }
 }

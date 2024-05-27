@@ -11,7 +11,7 @@ function SingleInputPage() {
     };
 
     return (
-        <div className="container">
+        <div className="container-single-input-page">
             <h1>What is your name?</h1>
             <input
                 type="text"

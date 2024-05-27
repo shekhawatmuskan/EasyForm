@@ -1,20 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faEye, faUpload, faTools, faPalette, faCode, faShareAlt, faPoll } from '@fortawesome/free-solid-svg-icons';
-import './form-builder-header.css'; // Import the CSS file
-
+import './form-builder-header.css';
 function FormBuilderHeader() {
   return (
     <div className="form-header">
       <div className="form-header-content">
-        {/* Arrow button with Font Awesome icon */}
-        <button className="arrow-button blue">
-          <FontAwesomeIcon icon={faArrowLeft} className="button-icon" />
-        </button>
+        <div className="arrow-icon" >
+          <FontAwesomeIcon icon={faArrowLeft} className="arrow-icon" />
+        </div>
         <h1 className="form-title">My Form</h1>
       </div>
       <div className="action-buttons">
-        {/* Buttons with icons and text */}
         <button className="action-button green">
           <FontAwesomeIcon icon={faTools} className="button-icon" style={{ color: 'rgb(37 99 235 )' }} />
           <span>Build</span>
@@ -37,12 +34,10 @@ function FormBuilderHeader() {
         </button>
       </div>
       <div className="action-buttons">
-        {/* Preview button with icon and text */}
         <button className="preview-button">
           <FontAwesomeIcon icon={faEye} className="button-icon" style={{ color: 'black' }} />
           <span>Preview</span>
         </button>
-        {/* Add a minor gap between Preview and Publish Now buttons */}
         <button className="publish-button">
           <FontAwesomeIcon icon={faUpload} className="button-icon" style={{ color: 'white' }} />
           <span>Publish Now</span>

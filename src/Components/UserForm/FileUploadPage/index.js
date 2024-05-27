@@ -9,7 +9,7 @@ function FileUploadPage() {
     };
 
     return (
-        <div className="container">
+        <div className="container-file-upload">
             <h1>Please upload a file</h1>
             <label htmlFor="file-upload" className="upload-label">
                 <div className="input-container">

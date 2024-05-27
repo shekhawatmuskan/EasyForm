@@ -9,8 +9,8 @@ function MultiInputPage() {
         setFeedback(event.target.value);
     };
     return (
-        <div className="container">
-            <h1>Give your valuable feedback.</h1>
+        <div className="container-multi-input-page">
+            <h1>please give your valuable feedback</h1>
 
             <textarea
                 className="feedback-textarea"

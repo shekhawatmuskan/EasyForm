@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './signature-page.css';
 
 function SignaturePage() {
@@ -47,7 +47,7 @@ function SignaturePage() {
     };
 
     return (
-        <div className="container">
+        <div className="container-signature-page">
             <h1>Please sign here *</h1>
             <canvas
                 ref={canvasRef}
@@ -61,16 +61,17 @@ function SignaturePage() {
                 style={{
                     touchAction: 'none',
                     userSelect: 'none',
-                    border: '2px dashed #000', // border style
+                    border: '2px solid #000', // border style
                     borderRadius: '5px', // rounded corners
                 }}
             >
                 Please sign...
             </canvas>
             <div className="button-container">
-                <button className="next-button">Next
-                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
-                <div style={{ width: '20px' }}></div> {/* Add some space between buttons */}
+                <button className="next-button">
+                    Next
+                    <FontAwesomeIcon icon={faArrowRight} className="button-icon" />
+                </button>
                 {isSignature && (
                     <button className="clear-button" onClick={clearSignature}>
                         Clear

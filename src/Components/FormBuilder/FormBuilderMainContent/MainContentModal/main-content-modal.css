@@ -11,12 +11,8 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     z-index: 999;
     display: flex;
-    /* Add display flex */
     flex-direction: column;
-    /* Align items in a column */
     align-items: flex-start;
-    /* Align items to the left */
-
 }
 
 .close {

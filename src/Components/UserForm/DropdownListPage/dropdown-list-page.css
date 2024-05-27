@@ -1,0 +1,46 @@
+.container-dropdown-page {
+    font-size: 15px;
+    color: rgb(55 65 81);
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 500;
+
+
+    .input-dropdown {
+        position: relative;
+        width: 500px;
+    }
+
+    .input-field {
+        width: 500px;
+        height: 30px;
+        border-radius: 5px;
+        border-color: rgb(229, 231, 235);
+    }
+
+    .dropdown-list {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        width: 500px;
+        z-index: 100;
+    }
+
+
+
+    .next-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-right: 15px;
+        background-color: rgb(55 65 81);
+        color: white;
+        border-radius: 5px;
+        margin-left: 10px;
+        align-items: left;
+        z-index: 1;
+        margin-top: 30px;
+    }
+
+}

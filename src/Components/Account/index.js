@@ -1,6 +1,6 @@
 import './account.css';
 import LoginPage from '../Account/LoginPage';
-// import SignUpPage from './SignUpPage';
+import SignUpPage from './SignUpPage';
 
 
 function Account() {

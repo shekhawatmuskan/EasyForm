@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './feedback-page.css';
 
 
@@ -18,7 +18,7 @@ function FeedbackPage() {
         console.log("Next button clicked!");
     };
     return (
-        <div>
+        <div className="container-feedback-page">
             <h1>Please give us a rating.</h1>
             <div className="star-rating">
                 {[...Array(5)].map((_, index) => (
@@ -34,8 +34,8 @@ function FeedbackPage() {
             {rated && <p>You rated: {rating} stars</p>}
             <div className="button-container">
                 <button className="next-button" onClick={handleNextClick}>Next
-                <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
-                
+                    <FontAwesomeIcon icon={faArrowRight} className="button-icon" /></button>
+
             </div>
         </div>
     )
