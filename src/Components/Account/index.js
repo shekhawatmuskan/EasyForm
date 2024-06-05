@@ -3,11 +3,11 @@ import LoginPage from '../Account/LoginPage';
 import SignUpPage from './SignUpPage';
 
 
-function Account() {
+const Account = () => {
     return (
         <div className="App">
-            {/* <LoginPage /> */}
-            {/* <SignUpPage /> */}
+            <LoginPage />
+            <SignUpPage />
 
         </div>
     );
