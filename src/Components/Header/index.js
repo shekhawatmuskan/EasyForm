@@ -1,18 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './header.css';
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleAvatarClick = () => {
+    setIsMenuOpen(prevState => !prevState);
+  };
+
+  const onClickSignOut = () => {
+    localStorage.clear();
+    navigate('/login'); // Redirect to the login page after sign out
+  };
+
   return (
-    <header style={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 20px' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src="https://app.youform.io/images/youform-logo-small.png" alt="Logo" style={{ width: '200px', marginRight: '10px' }} />
-        <nav>
-          <ul style={{ listStyleType: 'none', margin: 0, padding: 0 }}>
-            <li style={{ display: 'inline-block', marginLeft: '20px' }}><a href="/dashboard" style={{ textDecoration: 'none', color: 'black', fontSize: '16px' }}>Dashboard</a></li>
+    <header className="header">
+      <div className="fields">
+        <img src="https://app.youform.io/images/youform-logo-small.png" alt="Logo" className="logo" />
+        <nav className="nav">
+          <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
           </ul>
         </nav>
       </div>
-      <div>
-        <img src="https://app.youform.io/images/default-avatar.svg" alt="User Avatar" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+      <div className="avatar-container">
+        <img
+          src="https://app.youform.io/images/default-avatar.svg"
+          alt="User Avatar"
+          className="avatar"
+          style={{
+            border: isMenuOpen ? '2px solid blue' : 'none'
+          }}
+          onClick={handleAvatarClick}
+        />
+        {isMenuOpen && (
+          <div className="menu">
+            <button onClick={onClickSignOut} className="sign-out-btn">Sign Out</button>
+          </div>
+        )}
       </div>
     </header>
   );

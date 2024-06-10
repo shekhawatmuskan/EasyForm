@@ -6,16 +6,20 @@ import {
   Navigate
 } from 'react-router-dom';
 import './App.css';
-import Account from './Components/Account';
 import Dashboard from './Dashboard';
-import LoginPage from './Components/Account/LoginPage'; // Ensure the correct import path
+import LoginPage from './Components/Account/LoginPage';
+import MainContent from "./Components/MainContent";
+import FormBuilder from './Components/FormBuilder';
 
 // Authentication logic within App.js
-const isAuthenticated = () => {
-  return !!localStorage.getItem('authToken');
-};
-
 const App = () => {
+  const isAuthenticated = () => {
+    const value = localStorage.getItem('authToken');
+    console.log(value);
+    return !!value;
+  };
+
+  console.log(isAuthenticated());
   return (
     <Router>
       <Routes>
@@ -25,7 +29,6 @@ const App = () => {
           element={
             isAuthenticated() ? (
               <div className="App">
-                <Account />
                 <Dashboard />
               </div>
             ) : (
@@ -33,7 +36,9 @@ const App = () => {
             )
           }
         />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={isAuthenticated() ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
+        <Route path="/MainContent" element={<MainContent />} />
+        <Route path="/form-builder/:formId" element={<FormBuilder />} /> {/* Update the path */}
       </Routes>
     </Router>
   );

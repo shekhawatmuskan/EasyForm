@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './login-page.css'; // Assuming you have styles in login-page.css
 import { FaGoogle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -12,16 +11,26 @@ const LoginPage = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3001/login', {
-                email: email,
-                password: password
+            const response = await fetch('http://localhost:3001/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
             });
-            console.log('Login successful:', response.data);
-            localStorage.setItem('authToken', response.data.token); // Assuming your API returns a token
-            navigate('/dashboard');
+
+            if (response.ok) {
+                const result = await response.json();
+                localStorage.setItem('user_id', result.user_id); // Assuming backend returns user_id
+                localStorage.setItem('authToken', result.token); // Assuming backend returns an auth token
+                navigate('/dashboard');
+            } else {
+                console.error('Failed to login');
+                alert('Invalid credentials');
+            }
         } catch (error) {
             console.error('Login failed:', error);
-            alert('Invalid credentials');
+            alert('An error occurred. Please try again.');
         }
     };
 

@@ -2,6 +2,84 @@ import React, { useState } from 'react';
 import './form-builder-main-content.css';
 import MainContentModal from './MainContentModal';
 
+function App() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [buttonText, setButtonText] = useState("Let's start");
+  const [coverImage, setCoverImage] = useState("");
+  const [textAlign, setTextAlign] = useState("left");
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
+  const handleButtonTextChange = (e) => {
+    setButtonText(e.target.value);
+  };
+
+  const handleCoverImageChange = (e) => {
+    setCoverImage(e.target.value);
+  };
+
+  const handleTextAlignChange = (e) => {
+    setTextAlign(e.target.value);
+  };
+
+  return (
+    <div className="container">
+      <h1>Create Your Button</h1>
+      <div className="form-group">
+        <label htmlFor="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={handleTitleChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          value={description}
+          onChange={handleDescriptionChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="button-text">Button Text:</label>
+        <input
+          type="text"
+          id="button-text"
+          value={buttonText}
+          onChange={handleButtonTextChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="cover-image">Cover Image:</label>
+        <input
+          type="text"
+          id="cover-image"
+          value={coverImage}
+          onChange={handleCoverImageChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="text-align">Text Align:</label>
+        <select id="text-align" value={textAlign} onChange={handleTextAlignChange}>
+          <option value="left">Left</option>
+          <option value="center">Center</option>
+          <option value="right">Right</option>
+        </select>
+      </div>
+      <button>Create Button</button>
+    </div>
+  );
+}
+
 function PathStrobe({ position, onModalOpen }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -30,8 +108,6 @@ function PathStrobe({ position, onModalOpen }) {
     );
 }
 
-// export default PathStrobe;
-
 function FormBuilderMainContent() {
     // Array of light colors for input boxes
     const lightColors = ['#FFCCCC', '#CCFFCC', '#CCCCFF', '#FFCCFF', '#CCFFFF', '#FFFFCC', '#FFDDFF', '#DDFFFF', '#FFEECC', '#CCFFEE', '#FFDDDD'];
@@ -43,7 +119,6 @@ function FormBuilderMainContent() {
     const handleModalOpen = () => {
         setIsOpen(!isOpen);
     };
-
 
     const handleDragStart = (event, index) => {
         event.dataTransfer.setData('index', index.toString());
@@ -58,7 +133,6 @@ function FormBuilderMainContent() {
     const handleDragOver = (event) => {
         event.preventDefault();
     };
-
 
     const handleInputClick = (index) => {
         setSelectedInput(index === selectedInput ? null : index);
@@ -79,19 +153,65 @@ function FormBuilderMainContent() {
     return (
         <div className="main-content">
             <div className="left-nav" style={{ overflowY: 'scroll' }}>
-                <div style={{ height: '200vh' }}> {/* To add the screen overflow slider */}
-                    {/* Loop through to create 11 label input boxes */}
-                    {[...Array(11)].map((_, index) => (
-                        <div key={index} className="input-box" style={{ width: '80%', marginBottom: '10px' }} draggable onDragStart={(event) => handleDragStart(event, index)}>
-                            <input type="text" id={`input-${index}`} style={{ width: '100%', boxSizing: 'border-box', backgroundColor: lightColors[index] }} />
-                            <label htmlFor={`input-${index}`} style={{ color: 'black', position: 'relative' }} onClick={() => handleInputClick(index)}>
-                                <div className="viewbox" style={{ display: selectedInput === index ? 'block' : 'none', position: 'absolute', top: '-25px', right: '-35px', padding: '5px', background: 'white', border: '1px solid #ccc' }}>
-                                    <div className="option" onClick={() => handleDelete(index)}>Delete</div>
-                                    <div className="option" onClick={() => handleDuplicate(index)}>Duplicate</div>
-                                </div>
-                            </label>
-                        </div>
-                    ))}
+                <div className="block">
+                    <div className="block-title">
+                        1. Welcome! Please take s...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        2. what is your name
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        3. please give your valuabl...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        4. Please enter your phone...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        5. when do you like to get ...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        ✔ 6. which day suits you bes...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        7. which specialist you wa...
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        8. Please select a date
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        9. Please give us a rating.
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        10. Please sign here
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        11. Please upload a file
+                    </div>
+                </div>
+                <div className="block">
+                    <div className="block-title">
+                        Thank you page
+                    </div>
                 </div>
             </div>
             <div className="middle-content" onDrop={handleDrop} onDragOver={handleDragOver}>
@@ -102,31 +222,13 @@ function FormBuilderMainContent() {
                         </div>
                     ))}
                     <PathStrobe position="top" onModalOpen={handleModalOpen} />
-
                     <PathStrobe position="bottom" onModalOpen={handleModalOpen} />
                     <MainContentModal isOpen={isOpen} onClose={handleModalOpen} />
-
                 </div>
-
             </div>
-
             <div className="right-nav">
-                <label htmlFor="questionInput">Question</label>
-                <input type="text" id="questionInput" />
-
-                {/* Inserted code */}
-                <h3> Description</h3>
-                <label htmlFor="labelInput">Label Input</label>
-                <div className="label-input">
-                    <button><strong>Bold</strong></button>
-                    <button><em>Italic</em></button>
-                    <button>Link</button>
-                    <button>YouTube Embed</button>
-                </div>
-                <textarea id="labelInput" rows="4" cols="50" placeholder="Enter text..."></textarea>
-                {/* End of inserted code */}
+                <App />
             </div>
-
         </div>
     );
 }
