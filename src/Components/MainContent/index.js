@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './main-content.css';
-import NoFormFound from '../NoFormFound';
-import Modal from '../Modal';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./main-content.css";
+import NoFormFound from "../NoFormFound";
+import Modal from "../Modal";
+import NewForm from "../NewForm";
 
 function MainContent() {
   const navigate = useNavigate();
+  const [formName, setFormName] = useState("");
+  const [forms, setForms] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formName, setFormName] = useState('');
+  const [showOptions, setShowOptions] = useState(null);
+
+  useEffect(() => {
+    fetchForms();
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -21,71 +28,97 @@ function MainContent() {
     setFormName(e.target.value);
   };
 
-  const createForm = async () => {
-    const user_id = localStorage.getItem('user_id');
-
-    if (!user_id) {
-      console.error('User ID not found in localStorage');
-      return;
-    }
-
-    const response = await fetch('http://localhost:3001/forms', {
-      method: 'POST',
+  const fetchForms = async () => {
+    const token = await localStorage.getItem("authToken");
+    const response = await fetch("http://localhost:3001/forms", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        name: formName,
-        user_id: user_id,
-        title: formName
-      }),
     });
+    const formList = await response.json();
+    setForms(formList);
+  };
 
-    if (response.ok) {
-      const result = await response.json();
-      const formId = result.id;
-      closeModal();
-      navigate(`/form-builder/${formId}`);
-    } else {
-      const errorData = await response.json();
-      console.error('Failed to create form', errorData);
+  
+  const deleteForm = async (formId) => {
+    const token = localStorage.getItem("authToken");
+
+    try {
+      const response = await fetch(`http://localhost:3001/forms/${formId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        setForms(forms.filter((form) => form.id !== formId));
+      } else if (response.status === 404) {
+        console.error("Form not found");
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to delete form", errorData);
+      }
+    } catch (error) {
+      console.error("Failed to delete form", error.message);
     }
   };
 
+  const toggleOptions = (formId) => {
+    setShowOptions(showOptions === formId ? null : formId);
+  };
+
+  const handleFormClick = (formId) => {
+    navigate(`/form-builder/${formId}`);
+  };
+
   return (
-    <div>
+    <div className="dashboard">
       <div className="main-content">
         <h2>Your Forms</h2>
         <div></div>
-        <button className='new-form-btn' onClick={openModal}>+ New Form</button>
+        <button className="new-form-btn" onClick={openModal}>
+          + New Form
+        </button>
       </div>
-      <NoFormFound />
+      {forms.length === 0 && <NoFormFound />}
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2>Form name</h2>
-        <input
-          type="text"
-          id="textInput"
-          value={formName}
-          onChange={handleFormNameChange}
-        />
-        <div className='modal-footer'>
-          <button className="btn cancel-btn" onClick={closeModal}>Cancel</button>
-          <button className="btn" onClick={createForm}>Create Form</button>
-        </div>
+        {/* Pass isOpen state to NewForm component */}
+        <NewForm isOpen={isModalOpen} onClose={closeModal} />
       </Modal>
+      
       <div className="forms">
-         <div class="form">
-        <h2>My Form</h2>
-        <p>4 responses</p>
-        <button class="three-dots">...</button>
+        {forms.map((form) => (
+          <div
+            className="form"
+            key={form.id}
+            onClick={() => handleFormClick(form.id)}
+          >
+            <h2>{form?.title}</h2>
+            <button
+              className="three-dots"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleOptions(form.id);
+              }}
+            >
+              ...
+            </button>
+            {showOptions === form.id && (
+              <div className="options-menu">
+                <button onClick={() => deleteForm(form.id)}>
+                  <span role="img" aria-label="delete">
+                    🗑️
+                  </span>{" "}
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
       </div>
-      <div class="form">
-        <h2>i form</h2>
-        <p>13 responses</p>
-        <button class="three-dots">...</button>
-      </div>
-      </div>
-    
     </div>
   );
 }

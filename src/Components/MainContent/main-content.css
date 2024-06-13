@@ -1,86 +1,112 @@
+.dashboard {
+  width: 80%;
+  margin: auto;
 
-.main-content {
+  .main-content {
     background-color: white;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+  }
 
-.forms{
+  .forms {
     display: flex;
-}
+    flex-wrap: wrap;
+  }
 
-.form {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+  .form {
     width: 200px;
-    margin: 20px;
-    text-align: center;
-}
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
 
-.form h2 {
+  .form h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
-}
+    margin-bottom: 10px;
+  }
 
-.form p {
-    font-size: 16px;
+  .form p {
+    font-size: 14px;
     color: #666;
-}
+  }
 
-.three-dots {
-    float: right;
+  .options-menu {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    margin-top: 8px;
+    /* Adjust as needed for proper placement */
+  }
+
+  .options-menu button {
+    background: none;
     border: none;
-    background-color: transparent;
-    font-size: 1em;
-    color: #666;
+    padding: 8px 16px;
+    width: 100%;
+    text-align: left;
     cursor: pointer;
-    margin-top: -5px;
-}
+  }
 
-.three-dots:hover {
+  .options-menu button:hover {
+    background: #f0f0f0;
+  }
+
+  .three-dots {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 0;
+    margin-left: auto;
+  }
+
+  .three-dots:hover {
     color: #333;
-}
+  }
 
-.new-form-btn {
+  .new-form-btn {
     background-color: rgb(55 65 81);
     padding: 4px 4px;
     border: 2px solid rgb(55 65 81);
     border-radius: 5px;
-    border-width: 15PX;
+    border-width: 15px;
     height: 40px;
     color: white;
     display: inline-flex;
     text-align: center;
     align-items: center;
-}
+  }
 
-input {
+  input {
     width: 400px;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-sizing: border-box;
-}
+  }
 
-.btn {
+  .btn {
     padding: 10px 20px;
     margin-left: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
     cursor: pointer;
+  }
 
-}
-
-.cancel-btn {
+  .cancel-btn {
     background-color: white;
-}
+  }
 
-.modal-footer {
+  .modal-footer {
     text-align: right;
+  }
 }
