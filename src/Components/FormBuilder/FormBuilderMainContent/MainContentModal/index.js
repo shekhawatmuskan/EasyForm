@@ -79,16 +79,16 @@ function MainContentModal({ isOpen, onClose }) {
                   </p>
                 </div>
               )}
+              {selectedBlock && (
+                <div className="main-content-modal-footer">
+                  <button className="use-block-button">
+                    Use this block
+                    <FontAwesomeIcon icon={faArrowRight} className="icon" />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
-          {selectedBlock && (
-            <div className="main-content-modal-footer">
-              <button className="use-block-button">
-                Use this block
-                <FontAwesomeIcon icon={faArrowRight} className="icon" />
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

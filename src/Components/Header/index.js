@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./header.css";
+import styles from "./header.module.css"; // Import CSS module
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,19 +12,27 @@ function Header() {
 
   const onClickSignOut = () => {
     localStorage.clear();
-    navigate("/login"); // Redirect to the login page after sign out
+    navigate("/login");
   };
 
   return (
-    <header className="header">
-      <div className="header-navigation">
-        <div className="fields">
+    <header className={styles.header}>
+      {" "}
+      {/* Use styles.header here */}
+      <div className={styles["header-navigation"]}>
+        {" "}
+        {/* Use styles["header-navigation"] here */}
+        <div className={styles.fields}>
+          {" "}
+          {/* Use styles.fields here */}
           <img
             src="https://app.youform.io/images/youform-logo-small.png"
             alt="Logo"
-            className="logo"
+            className={styles.logo}
           />
-          <nav className="nav">
+          <nav className={styles.nav}>
+            {" "}
+            {/* Use styles.nav here */}
             <ul>
               <li>
                 <a href="/dashboard">Dashboard</a>
@@ -32,16 +40,25 @@ function Header() {
             </ul>
           </nav>
         </div>
-        <div className="avatar-container">
+        <div className={styles["avatar-container"]}>
+          {" "}
+          {/* Use styles["avatar-container"] here */}
           <img
             src="https://app.youform.io/images/default-avatar.svg"
             alt="User Avatar"
-            className="avatar"
+            className={styles.avatar}
             onClick={handleAvatarClick}
           />
           {isMenuOpen && (
-            <div className="menu">
-              <button onClick={onClickSignOut} className="sign-out-btn">
+            <div className={styles.menu}>
+              {" "}
+              {/* Use styles.menu here */}
+              <button
+                onClick={onClickSignOut}
+                className={styles["sign-out-btn"]}
+              >
+                {" "}
+                {/* Use styles["sign-out-btn"] here */}
                 Sign Out
               </button>
             </div>
