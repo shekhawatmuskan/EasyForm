@@ -16,7 +16,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
-function MainContentModal({ isOpen, onClose }) {
+function MainContentModal({ isOpen, onClose, onSelectBlock }) {
   const [selectedBlock, setSelectedBlock] = useState(null);
 
   const handleBlockClick = (block) => {
@@ -25,6 +25,13 @@ function MainContentModal({ isOpen, onClose }) {
 
   const handleClose = () => {
     onClose(); // Call onClose function passed from parent component
+  };
+
+  const handleUseBlock = () => {
+    if (selectedBlock) {
+      onSelectBlock(selectedBlock);
+      handleClose(); // Close the modal after selecting the block
+    }
   };
 
   const blockOptions = [
@@ -81,7 +88,7 @@ function MainContentModal({ isOpen, onClose }) {
               )}
               {selectedBlock && (
                 <div className="main-content-modal-footer">
-                  <button className="use-block-button">
+                  <button className="use-block-button" onClick={handleUseBlock}>
                     Use this block
                     <FontAwesomeIcon icon={faArrowRight} className="icon" />
                   </button>

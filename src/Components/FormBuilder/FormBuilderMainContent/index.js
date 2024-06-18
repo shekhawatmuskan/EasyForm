@@ -2,7 +2,18 @@ import React, { useState } from "react";
 import "./form-builder-main-content.css";
 import MainContentModal from "./MainContentModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBold, faItalic, faLink } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBold,
+  faItalic,
+  faLink,
+  faCheckSquare,
+  faListOl,
+  faCalendarAlt,
+  faStar,
+  faSignature,
+  faFileUpload,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
 // Component for draggable block in left navigation
@@ -102,6 +113,7 @@ function FormBuilderMainContent() {
 
   const [droppedBoxes, setDroppedBoxes] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedBlocks, setSelectedBlocks] = useState([]);
 
   const handleModalOpen = () => {
     setIsOpen(!isOpen);
@@ -123,6 +135,8 @@ function FormBuilderMainContent() {
 
   const handleBlockClick = (index) => {
     // Handle block click
+    const block = blockTitles[index];
+    setSelectedBlocks([...selectedBlocks, block]);
   };
 
   const handleBold = () => {
@@ -198,11 +212,11 @@ function FormBuilderMainContent() {
   return (
     <div className="main-content">
       <div className="left-nav">
-        {blockTitles.map((title, index) => (
+        {selectedBlocks.map((title, index) => (
           <Block
             key={index}
             title={title}
-            index={index}
+            index={blockTitles.indexOf(title)}
             onDragStart={handleDragStart}
             onClick={handleBlockClick}
           />
@@ -224,7 +238,13 @@ function FormBuilderMainContent() {
           <PathStrobe position="top" onModalOpen={handleModalOpen} />
           <PathStrobe position="bottom" onModalOpen={handleModalOpen} />
           {/* Main content modal */}
-          <MainContentModal isOpen={isOpen} onClose={handleModalOpen} />
+          <MainContentModal
+            isOpen={isOpen}
+            onClose={handleModalOpen}
+            onSelectBlock={(block) =>
+              setSelectedBlocks([...selectedBlocks, block.text])
+            }
+          />
         </div>
       </div>
       <div className="right-nav">
@@ -260,63 +280,6 @@ function FormBuilderMainContent() {
           />
         </div>
         <div className="form-group">
-          <input
-            type="checkbox"
-            id="isRequired"
-            checked={isRequired}
-            onChange={() => setIsRequired(!isRequired)}
-          />
-          <label htmlFor="isRequired">Required field</label>
-          <p>If checked, users will be required to complete this field.</p>
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            id="isAllow"
-            checked={isAllow}
-            onChange={() => setIsAllow(!isAllow)}
-          />
-          <label htmlFor="isAllow">Allow multiple</label>
-          <p>If checked, user will be able to upload multiple files.</p>
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            id="isRandomized"
-            checked={isRandomized}
-            onChange={() => setIsRandomized(!isRandomized)}
-          />
-          <label htmlFor="isRandomized">Randomized options</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            id="isHorizontally"
-            checked={isHorizontally}
-            onChange={() => setIsHorizontally(!isHorizontally)}
-          />
-          <label htmlFor="isHorizontally">Horizontally align options</label>
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            id="isHide"
-            checked={isHide}
-            onChange={() => setIsHide(!isHide)}
-          />
-          <label htmlFor="isHide">Hide labels</label>
-        </div>
-        <div className="form-group">
-          <label htmlFor="urlParameter">Auto fill via URL parameter</label>
-          <input
-            type="text"
-            id="urlParameter"
-            className="form-control"
-            value={urlParameter}
-            onChange={(e) => setUrlParameter(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
           <label htmlFor="description">Description</label>
           <div>
             <Toolbar />
@@ -342,51 +305,6 @@ function FormBuilderMainContent() {
           </select>
         </div>
         <div className="form-group">
-          <label htmlFor="text-box-size">Text Box Size</label>
-          <select
-            id="text-box-size"
-            className="form-control"
-            value={textBoxSize}
-            onChange={(e) => setTextBoxSize(e.target.value)}
-          >
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-            <option value="extralarge">Extra Large</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="type">Type</label>
-          <select
-            id="type"
-            className="form-control"
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-          >
-            <option value="single-select">Single Select</option>
-            <option value="multi-select">Multi Select</option>
-            <option value="dropdown">Dropdown</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="max-rating">Max Rating</label>
-          <select
-            id="max-rating"
-            className="form-control"
-            value={maxRating}
-            onChange={(e) => setMaxRating(e.target.value)}
-          >
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-        <div className="form-group">
           <label htmlFor="button-text">Button Text</label>
           <input
             type="text"
@@ -406,29 +324,107 @@ function FormBuilderMainContent() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="options">Options</label>
-          <ul className="options-list">
+          <label>Options</label>
+          <div className="options-container">
             {options.map((option, index) => (
-              <li key={index} className="option-item">
+              <div key={index} className="option">
                 {option.isEditing ? (
-                  <input
-                    type="text"
-                    value={option.value}
-                    onChange={(e) => handleInputChange(e, index)}
-                  />
+                  <>
+                    <input
+                      type="text"
+                      value={option.value}
+                      onChange={(e) => handleInputChange(e, index)}
+                    />
+                    <button onClick={() => handleSave(index)}>Save</button>
+                  </>
                 ) : (
-                  <span>{option.value}</span>
+                  <>
+                    <span>{option.value}</span>
+                    <button onClick={() => handleEdit(index)}>Edit</button>
+                  </>
                 )}
-                <button onClick={() => handleEdit(index)}>
-                  {option.isEditing ? "Save" : "Edit"}
-                </button>
-                {option.isEditing && (
-                  <button onClick={() => handleSave(index)}>Save</button>
-                )}
-              </li>
+              </div>
             ))}
-          </ul>
-          <button onClick={handleAddOption}>Add Option</button>
+            <button onClick={handleAddOption}>Add Option</button>
+          </div>
+        </div>
+        {/* Additional form elements */}
+        <div className="additional-form-elements">
+          <label>
+            <input
+              type="checkbox"
+              checked={isRequired}
+              onChange={() => setIsRequired(!isRequired)}
+            />
+            Required
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={isAllow}
+              onChange={() => setIsAllow(!isAllow)}
+            />
+            Allow multiple selections
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={isRandomized}
+              onChange={() => setIsRandomized(!isRandomized)}
+            />
+            Randomize options
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={isHorizontally}
+              onChange={() => setIsHorizontally(!isHorizontally)}
+            />
+            Display options horizontally
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={isHide}
+              onChange={() => setIsHide(!isHide)}
+            />
+            Hide option labels
+          </label>
+          <label>
+            <span>URL Parameter:</span>
+            <input
+              type="text"
+              value={urlParameter}
+              onChange={(e) => setUrlParameter(e.target.value)}
+            />
+          </label>
+          <label>
+            <span>Text Box Size:</span>
+            <select
+              value={textBoxSize}
+              onChange={(e) => setTextBoxSize(e.target.value)}
+            >
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </label>
+          <label>
+            <span>Max Rating:</span>
+            <input
+              type="number"
+              value={maxRating}
+              onChange={(e) => setMaxRating(e.target.value)}
+            />
+          </label>
+          <label>
+            <span>Type:</span>
+            <select value={type} onChange={(e) => setType(e.target.value)}>
+              <option value="dropdown">Dropdown</option>
+              <option value="checkbox">Checkbox</option>
+              <option value="radio">Radio</option>
+            </select>
+          </label>
         </div>
       </div>
     </div>
