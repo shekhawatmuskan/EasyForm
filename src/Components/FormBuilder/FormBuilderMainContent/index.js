@@ -13,6 +13,7 @@ import {
   faSignature,
   faFileUpload,
   faArrowRight,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 
@@ -74,6 +75,7 @@ function FormBuilderMainContent() {
     "Welcome! Please take some time to fill up this form."
   );
   const [question, setQuestion] = useState("What is your name?");
+  const [auto, setAuto] = useState("e.g rating");
   const [placeholder, setPlaceholder] = useState("Your answer here...");
   const [description, setDescription] = useState(
     "This will only take 2 minutes."
@@ -86,15 +88,14 @@ function FormBuilderMainContent() {
   const [isRandomized, setIsRandomized] = useState(false);
   const [isHorizontally, setIsHorizontally] = useState(false);
   const [isHide, setIsHide] = useState(false);
-  const [urlParameter, setUrlParameter] = useState("e.g email");
-  const [textBoxSize, setTextBoxSize] = useState("medium");
+  const [textBoxSize, setTextBoxSize] = useState("small");
   const [maxRating, setMaxRating] = useState("3");
   const [type, setType] = useState("dropdown");
-  const [options, setOptions] = useState([
-    { value: "morning", isEditing: false },
-    { value: "evening", isEditing: false },
-    { value: "afternoon", isEditing: false },
-  ]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [options, setOptions] = useState(["morning", "evening", "afternoon"]);
+  const [newOption, setNewOption] = useState("");
+  const [showNewOption, setShowNewOption] = useState(false);
+  const [showSettings, setShowSettings] = useState(null);
 
   const blockTitles = [
     "1. Welcome! Please take some time to fill up this form.",
@@ -159,35 +160,23 @@ function FormBuilderMainContent() {
     // Add your YouTube embed functionality here
   };
 
-  const handleEdit = (index) => {
-    setOptions((prevOptions) =>
-      prevOptions.map((option, i) =>
-        i === index ? { ...option, isEditing: !option.isEditing } : option
-      )
-    );
+  const addNewOption = () => {
+    if (newOption.trim()) {
+      setOptions([...options, newOption.trim()]);
+      setNewOption("");
+      setShowNewOption(false);
+    }
   };
 
-  const handleInputChange = (event, index) => {
-    setOptions((prevOptions) =>
-      prevOptions.map((option, i) =>
-        i === index ? { ...option, value: event.target.value } : option
-      )
-    );
+  const deleteOption = (index) => {
+    setOptions(options.filter((_, i) => i !== index));
+    setShowSettings(null);
   };
 
-  const handleSave = (index) => {
-    setOptions((prevOptions) =>
-      prevOptions.map((option, i) =>
-        i === index ? { ...option, isEditing: false } : option
-      )
-    );
-  };
-
-  const handleAddOption = () => {
-    setOptions((prevOptions) => [
-      ...prevOptions,
-      { value: "", isEditing: true },
-    ]);
+  const handleImageUpload = (index) => {
+    // Implement image upload logic here
+    console.log(`Upload image for option at index ${index}`);
+    setShowSettings(null);
   };
 
   const Toolbar = () => {
@@ -212,6 +201,17 @@ function FormBuilderMainContent() {
   return (
     <div className="main-content">
       <div className="left-nav">
+        <div className="add-block-button">
+          <div
+            className="plus-button"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={handleModalOpen}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            {isHovered && <span className="hover-text">Add New Block</span>}
+          </div>
+        </div>
         {selectedBlocks.map((title, index) => (
           <Block
             key={index}
@@ -324,48 +324,28 @@ function FormBuilderMainContent() {
           />
         </div>
         <div className="form-group">
-          <label>Options</label>
-          <div className="options-container">
-            {options.map((option, index) => (
-              <div key={index} className="option">
-                {option.isEditing ? (
-                  <>
-                    <input
-                      type="text"
-                      value={option.value}
-                      onChange={(e) => handleInputChange(e, index)}
-                    />
-                    <button onClick={() => handleSave(index)}>Save</button>
-                  </>
-                ) : (
-                  <>
-                    <span>{option.value}</span>
-                    <button onClick={() => handleEdit(index)}>Edit</button>
-                  </>
-                )}
-              </div>
-            ))}
-            <button onClick={handleAddOption}>Add Option</button>
-          </div>
-        </div>
-        {/* Additional form elements */}
-        <div className="additional-form-elements">
           <label>
             <input
               type="checkbox"
               checked={isRequired}
               onChange={() => setIsRequired(!isRequired)}
             />
-            Required
+            Required field
+            <p>If checked, users will be required to complete this field.</p>
           </label>
+        </div>
+        <div className="form-group">
           <label>
             <input
               type="checkbox"
               checked={isAllow}
               onChange={() => setIsAllow(!isAllow)}
             />
-            Allow multiple selections
+            Allow multiple
+            <p>If checked, user will be able to upload multiple files.</p>
           </label>
+        </div>
+        <div className="form-group">
           <label>
             <input
               type="checkbox"
@@ -374,57 +354,131 @@ function FormBuilderMainContent() {
             />
             Randomize options
           </label>
+        </div>
+        <div className="form-group">
           <label>
             <input
               type="checkbox"
               checked={isHorizontally}
               onChange={() => setIsHorizontally(!isHorizontally)}
             />
-            Display options horizontally
+            Horizontally align options
           </label>
+        </div>
+        <div className="form-group">
           <label>
             <input
               type="checkbox"
               checked={isHide}
               onChange={() => setIsHide(!isHide)}
             />
-            Hide option labels
+            Hide labels
           </label>
+        </div>
+        <div className="form-group">
+          <label htmlFor="auto">Auto fill via URL parameter</label>
+          <input
+            type="text"
+            id="auto"
+            className="form-control"
+            value={auto}
+            onChange={(e) => setAuto(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="text-box-size">Text Box Size</label>
+          <select
+            id="text-box-size"
+            className="form-control"
+            value={textBoxSize}
+            onChange={(e) => setTextBoxSize(e.target.value)}
+          >
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="extra-large">Extra Large</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="max-rating">Max Rating</label>
+          <select
+            id="max-rating"
+            className="form-control"
+            value={maxRating}
+            onChange={(e) => setMaxRating(e.target.value)}
+          >
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div className="form-group type-select">
           <label>
-            <span>URL Parameter:</span>
-            <input
-              type="text"
-              value={urlParameter}
-              onChange={(e) => setUrlParameter(e.target.value)}
-            />
-          </label>
-          <label>
-            <span>Text Box Size:</span>
+            Type
             <select
-              value={textBoxSize}
-              onChange={(e) => setTextBoxSize(e.target.value)}
+              id="type"
+              className="form-control"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
             >
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
-          </label>
-          <label>
-            <span>Max Rating:</span>
-            <input
-              type="number"
-              value={maxRating}
-              onChange={(e) => setMaxRating(e.target.value)}
-            />
-          </label>
-          <label>
-            <span>Type:</span>
-            <select value={type} onChange={(e) => setType(e.target.value)}>
               <option value="dropdown">Dropdown</option>
               <option value="checkbox">Checkbox</option>
               <option value="radio">Radio</option>
             </select>
           </label>
+        </div>
+        <div className="form-group">
+          <label>
+            Options
+            <div className="add-option" onClick={() => setShowNewOption(true)}>
+              +
+            </div>{" "}
+          </label>
+          {showNewOption && (
+            <div className="new-option">
+              <input
+                type="text"
+                value={newOption}
+                onChange={(e) => setNewOption(e.target.value)}
+                placeholder="Type new option"
+              />
+              <button onClick={addNewOption}>Add</button>
+            </div>
+          )}
+          <div className="options-list">
+            {options.map((option, index) => (
+              <div key={index} className="option-item">
+                <span className="arrow">↻</span>
+                <span className="option-text">{option}</span>
+                <span
+                  className="settings"
+                  onClick={() => setShowSettings(index)}
+                >
+                  ⚙
+                </span>
+                {showSettings === index && (
+                  <div className="settings-menu">
+                    <button onClick={() => deleteOption(index)}>Delete</button>
+                    <button onClick={() => handleImageUpload(index)}>
+                      Image
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <p className="help-text">
+            Have a long list of options? Just paste them above.
+            <br />
+            <a href="#" className="video-link">
+              Watch video
+            </a>
+          </p>
         </div>
       </div>
     </div>
