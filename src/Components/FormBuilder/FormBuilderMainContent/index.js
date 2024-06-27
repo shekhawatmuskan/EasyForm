@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./form-builder-main-content.css";
 import MainContentModal from "./MainContentModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,13 +6,6 @@ import {
   faBold,
   faItalic,
   faLink,
-  faCheckSquare,
-  faListOl,
-  faCalendarAlt,
-  faStar,
-  faSignature,
-  faFileUpload,
-  faArrowRight,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
@@ -75,7 +68,6 @@ function FormBuilderMainContent() {
     "Welcome! Please take some time to fill up this form."
   );
   const [question, setQuestion] = useState("What is your name?");
-  const [auto, setAuto] = useState("e.g rating");
   const [placeholder, setPlaceholder] = useState("Your answer here...");
   const [description, setDescription] = useState(
     "This will only take 2 minutes."
@@ -96,6 +88,7 @@ function FormBuilderMainContent() {
   const [newOption, setNewOption] = useState("");
   const [showNewOption, setShowNewOption] = useState(false);
   const [showSettings, setShowSettings] = useState(null);
+  const [auto, setAuto] = useState("");
 
   const blockTitles = [
     "1. Welcome! Please take some time to fill up this form.",
@@ -116,6 +109,18 @@ function FormBuilderMainContent() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedBlocks, setSelectedBlocks] = useState([]);
 
+  // Load selected blocks from local storage when component mounts
+  useEffect(() => {
+    const savedBlocks =
+      JSON.parse(localStorage.getItem("selectedBlocks")) || [];
+    setSelectedBlocks(savedBlocks);
+  }, []);
+
+  // Save selected blocks to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem("selectedBlocks", JSON.stringify(selectedBlocks));
+  }, [selectedBlocks]);
+
   const handleModalOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -127,19 +132,16 @@ function FormBuilderMainContent() {
   const handleDrop = (event) => {
     event.preventDefault();
     const index = parseInt(event.dataTransfer.getData("index"), 10);
-    setDroppedBoxes([...droppedBoxes, index]);
+    setSelectedBlocks([...selectedBlocks, blockTitles[index]]);
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
   };
 
-  const handleBlockClick = (index) => {
-    // Handle block click
-    const block = blockTitles[index];
-    setSelectedBlocks([...selectedBlocks, block]);
+  const handleBlockClick = (block) => {
+    setSelectedBlocks([...selectedBlocks, block.text]);
   };
-
   const handleBold = () => {
     console.log("Bold clicked");
     // Add your bold functionality here
@@ -228,25 +230,24 @@ function FormBuilderMainContent() {
         onDragOver={handleDragOver}
       >
         <div className="dotted-rectangle">
-          {/* Render dropped box if selected */}
-          {droppedBoxes.length > 0 && (
-            <div className="dropped-box">
-              {blockTitles[droppedBoxes[droppedBoxes.length - 1]]}
+          {selectedBlocks.map((block, index) => (
+            <div key={index} className="dropped-box">
+              {block}
             </div>
-          )}
+          ))}
           {/* Path strobe components */}
           <PathStrobe position="top" onModalOpen={handleModalOpen} />
           <PathStrobe position="bottom" onModalOpen={handleModalOpen} />
-          {/* Main content modal */}
-          <MainContentModal
-            isOpen={isOpen}
-            onClose={handleModalOpen}
-            onSelectBlock={(block) =>
-              setSelectedBlocks([...selectedBlocks, block.text])
-            }
-          />
         </div>
       </div>
+      {isOpen && (
+        <MainContentModal
+          isOpen={isOpen}
+          onClose={handleModalOpen}
+          onSelectBlock={handleBlockClick} // Update prop name to onSelectBlock
+          blockTitles={blockTitles}
+        />
+      )}
       <div className="right-nav">
         {/* Right nav form elements */}
         <div className="form-group">

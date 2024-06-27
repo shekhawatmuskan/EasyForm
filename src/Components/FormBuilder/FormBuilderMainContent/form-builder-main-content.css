@@ -71,6 +71,7 @@
   height: 400px;
   position: relative;
   margin-top: 40px;
+  background-color: #f9f9f9;
 }
 .path-strobe {
   position: absolute;
